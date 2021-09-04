@@ -14,4 +14,6 @@ You can check that these programs are installed by running `<program name> --ver
 npm install -g expo-cli
 ```
 
-This will install the Expo command line utility. Expo is a tool that will help us to display test the project.
+This will install the Expo command line utility. Expo is a tool that will help us to test the project.
+
+3. Install the Expo app on your Android or iOS device.
