@@ -15,4 +15,3 @@ npm install -g expo-cli
 ```
 
 This will install the Expo command line utility. Expo is a tool that will help us to display test the project.
-
