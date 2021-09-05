@@ -16,7 +16,7 @@ module.exports = {
 			version: "detect",
 		},
 	},
-	extends: ["plugin:react/recommended", "prettier"],
+	extends: ["plugin:react/recommended", "prettier", "plugin:prettier/recommended"],
 	// Do NOT use any eslint ruels that affect code formatting because prettier handles that.
 	rules: {
 		"no-console": "error",
