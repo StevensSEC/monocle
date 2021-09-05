@@ -1,9 +1,6 @@
 module.exports = {
 	root: true,
-	plugins: [
-		"react",
-		"prettier",
-	],
+	plugins: ["react", "prettier"],
 	env: {
 		browser: true,
 	},
@@ -12,17 +9,14 @@ module.exports = {
 		sourceType: "module",
 		ecmaFeatures: {
 			jsx: true,
-		}
+		},
 	},
 	settings: {
 		react: {
 			version: "detect",
 		},
 	},
-	extends: [
-		"plugin:react/recommended",
-		"prettier",
-	],
+	extends: ["plugin:react/recommended", "prettier"],
 	// Do NOT use any eslint ruels that affect code formatting because prettier handles that.
 	rules: {
 		"no-console": "error",
@@ -32,12 +26,12 @@ module.exports = {
 		"no-restricted-properties": [
 			"error",
 			{
-				"object": "document",
-				"property": "title",
+				object: "document",
+				property: "title",
 			},
 		],
 		"react/no-unescaped-entities": "warn",
 		"prettier/prop-types": "off",
 		"react/prefer-stateless-function": "error",
-	}
-}
+	},
+};

@@ -4,9 +4,9 @@
 
 1. Ensure that you have the following programs installed:
 
-- [git](https://git-scm.com/downloads)
-- [node](https://nodejs.org/en/)
-- [Visual Studio Code](https://code.visualstudio.com/)
+-   [git](https://git-scm.com/downloads)
+-   [node](https://nodejs.org/en/)
+-   [Visual Studio Code](https://code.visualstudio.com/)
 
 You can check that these programs are installed by running `<program name> --version` in your command line.
 
