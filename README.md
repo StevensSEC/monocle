@@ -13,7 +13,8 @@ You can check that these programs are installed by running `<program name> --ver
 2. Run:
 
 ```
-npm install -g expo-cli
+npm install -g yarn
+yarn global add expo-cli
 ```
 
 This will install the Expo command line utility. Expo is a tool that will help us to test the project.
@@ -23,7 +24,7 @@ This will install the Expo command line utility. Expo is a tool that will help u
 4. Navigate to the project folder and run:
 
 ```
-npm install
+yarn
 ```
 
 This will install all of this project's dependencies (modules that the program is using).
@@ -35,7 +36,7 @@ You should now be ready to run the project!
 1. After navigating to the project folder, run:
 
 ```
-npm start
+yarn start
 ```
 
 2. A dashboard should appear in your web browser. On the left sidebar, under the option labeled "Connection" change the selected option to "tunnel".
