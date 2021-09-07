@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 
-const CameraView = () => {
+const CameraView = (): JSX.Element => {
 	return <View></View>;
 };
 
