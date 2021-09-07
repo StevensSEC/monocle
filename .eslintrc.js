@@ -1,9 +1,10 @@
 module.exports = {
 	root: true,
-	plugins: ["react", "prettier"],
+	plugins: ["react", "prettier", "@typescript-eslint"],
 	env: {
 		browser: true,
 	},
+	parser: "@typescript-eslint/parser",
 	parserOptions: {
 		ecmaVersion: 6,
 		sourceType: "module",
@@ -33,5 +34,6 @@ module.exports = {
 		"react/no-unescaped-entities": "warn",
 		"prettier/prop-types": "off",
 		"react/prefer-stateless-function": "error",
+		"@typescript-eslint/no-var-requires": "error",
 	},
 };
