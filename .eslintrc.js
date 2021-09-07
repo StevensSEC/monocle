@@ -17,7 +17,21 @@ module.exports = {
 			version: "detect",
 		},
 	},
-	extends: ["plugin:react/recommended", "prettier", "plugin:prettier/recommended"],
+	extends: [
+		"plugin:react/recommended",
+		"prettier",
+		"plugin:prettier/recommended",
+		"plugin:@typescript-eslint/recommended",
+	],
+	overrides: [
+		{
+			files: ["*.ts", "*.tsx"],
+			extends: ["plugin:@typescript-eslint/recommended-requiring-type-checking"],
+			parserOptions: {
+				project: ["./tsconfig.json"],
+			},
+		},
+	],
 	// Do NOT use any eslint ruels that affect code formatting because prettier handles that.
 	rules: {
 		"no-console": "error",
