@@ -30,6 +30,9 @@ module.exports = {
 			parserOptions: {
 				project: ["./tsconfig.json"],
 			},
+			rules: {
+				"@typescript-eslint/switch-exhaustiveness-check": "error",
+			},
 		},
 	],
 	// Do NOT use any eslint ruels that affect code formatting because prettier handles that.
@@ -49,5 +52,7 @@ module.exports = {
 		"prettier/prop-types": "off",
 		"react/prefer-stateless-function": "error",
 		"@typescript-eslint/no-var-requires": "error",
+		"@typescript-eslint/adjacent-overload-signatures": "error",
+		"@typescript-eslint/no-extra-semi": "off",
 	},
 };
