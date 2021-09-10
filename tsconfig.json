@@ -4,6 +4,7 @@
 		"esModuleInterop": true,
 		"jsx": "react",
 		"strict": true,
-		"skipLibCheck": true // to prevent errors during compilation w/ tensorflow
+		"skipLibCheck": true, // to prevent errors during compilation w/ tensorflow
+		"strictNullChecks": true
 	}
 }
