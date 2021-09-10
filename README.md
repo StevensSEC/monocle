@@ -44,3 +44,13 @@ yarn start
 3. On Android, open up to the Expo Go app. On iOS, open up the Camera app. Scan the QR code that appears on the left sidebar on the dashboard.
 
 4. After some time, the app will have successfully loaded in the Expo app!
+
+## Training the model yourself
+
+1. Download the COCO dataset
+
+```bash
+./scripts/download_dataset.sh
+```
+
+2. TODO
