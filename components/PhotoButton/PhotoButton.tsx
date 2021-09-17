@@ -11,7 +11,7 @@ const PhotoButton = (props: PhotoButtonProps): JSX.Element => {
 			onPress={props.onPress}
 			title=""
 			color={props.color}
-			accessibilityLabel="Button to take photo"
+			accessibilityLabel="Take photo"
 		/>
 	);
 };
