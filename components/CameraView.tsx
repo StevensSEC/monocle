@@ -1,8 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Camera } from "expo-camera";
+import { Camera, CameraCapturedPicture } from "expo-camera";
+
+import PhotoButton from "../components/PhotoButton/PhotoButton"
 
 const CameraView = (): JSX.Element => {
+	const [ref, setRef] = useState<Camera | null>()
+
+	const onPressPhotoButton = () : void => {
+		void (async (): Promise<CameraCapturedPicture | undefined> => {
+			const picture = await ref?.takePictureAsync();
+			return picture;
+		})();
+	}
+
 	useEffect((): void => {
 		void (async (): Promise<void> => {
 			const permission = await Camera.getCameraPermissionsAsync();
@@ -20,7 +31,11 @@ const CameraView = (): JSX.Element => {
 
 	return (
 		<View style={styles.container}>
-			<Camera style={{ flex: 1 }} type={Camera.Constants.Type.back} />
+			<Camera 
+				ref={ref => {setRef(ref)}}
+				style={{ flex: 1 }} 
+				type={Camera.Constants.Type.back} />
+			
 		</View>
 	);
 };
