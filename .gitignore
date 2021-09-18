@@ -13,6 +13,7 @@ data/**/*.json
 data/**/*.jpg
 data/**/*.jpeg
 data/**/*.png
+yarn-error.log
 
 # macOS
 .DS_Store
