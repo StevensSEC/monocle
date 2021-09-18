@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Camera } from "expo-camera";
 
-import PhotoButton from "../components/PhotoButton/PhotoButton";
+import PhotoButton from "./PhotoButton/PhotoButton";
+import createOnPressPhotoButton from "./PhotoButton/onPressPhotoButton";
 
 const CameraView = (): JSX.Element => {
 	const [ref, setRef] = useState<Camera | null>();
 	const [lastImageURI, setLastImageURI] = useState<string>();
 
-	const onPressPhotoButton = async (): Promise<void> => {
-		const picture = await ref?.takePictureAsync();
-		setLastImageURI(picture?.uri);
-	};
+	const onPressPhotoButton = createOnPressPhotoButton(ref, setLastImageURI)
 
 	useEffect((): void => {
 		void (async (): Promise<void> => {
