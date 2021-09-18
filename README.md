@@ -25,6 +25,7 @@ This will install the Expo command line utility. Expo is a tool that will help u
 
 ```
 yarn
+yarn prepare
 ```
 
 This will install all of this project's dependencies (modules that the program is using).
