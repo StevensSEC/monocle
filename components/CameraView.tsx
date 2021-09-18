@@ -9,7 +9,7 @@ const CameraView = (): JSX.Element => {
 	const [ref, setRef] = useState<Camera | null>();
 	const [lastImageURI, setLastImageURI] = useState<string>();
 
-	const onPressPhotoButton = createOnPressPhotoButton(ref, setLastImageURI)
+	const onPressPhotoButton = createOnPressPhotoButton(ref, setLastImageURI);
 
 	useEffect((): void => {
 		void (async (): Promise<void> => {
