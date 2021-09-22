@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text} from "react-native";
 
-const TranscriptionView = (): JSX.Element => {
+const TranscriptionView = (prop:string): JSX.Element => {
 	return (
 		<View>
-			<Text>This is text</Text>
+			<Text>{prop}</Text>
 		</View>
 	);
 };
