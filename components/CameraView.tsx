@@ -61,6 +61,7 @@ const CameraView = (): JSX.Element => {
 				type={Camera.Constants.Type.back}
 			/>
 			<PhotoButton onPress={onPressPhotoButton} color="#f4e1e6" />
+			{/* FIXME: temporary, remove when we have actual UI */}
 			<Text>{lastImageURI}</Text>
 			<Text>{status}</Text>
 		</View>
