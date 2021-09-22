@@ -5,7 +5,7 @@ interface TranscriptionViewProps {
 	transcribedText: string;
 }
 
-const TranscriptionView = (props : TranscriptionViewProps): JSX.Element => {
+const TranscriptionView = (props: TranscriptionViewProps): JSX.Element => {
 	return (
 		<View>
 			<Text>{props.transcribedText}</Text>
