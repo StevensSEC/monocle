@@ -1,8 +1,16 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
-const TranscriptionView = (): JSX.Element => {
-	return <View></View>;
+interface TranscriptionViewProps {
+	transcribedText: string;
+}
+
+const TranscriptionView = (props: TranscriptionViewProps): JSX.Element => {
+	return (
+		<View>
+			<Text>{props.transcribedText}</Text>
+		</View>
+	);
 };
 
 export default TranscriptionView;
