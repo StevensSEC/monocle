@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Image} from "react-native";
 import { Camera } from "expo-camera";
+import Toolbar from "./Toolbar"
+import { registerBackend } from "@tensorflow/tfjs-core";
 
 const CameraView = (): JSX.Element => {
 	useEffect((): void => {
@@ -20,8 +22,10 @@ const CameraView = (): JSX.Element => {
 
 	return (
 		<View style={styles.container}>
-			<Camera style={{ flex: 1 }} type={Camera.Constants.Type.back} />
-		</View>
+			<Camera style={{ flex: 1}} type={Camera.Constants.Type.back}>
+				<Toolbar/>	
+			</Camera>
+		</View>	
 	);
 };
 
