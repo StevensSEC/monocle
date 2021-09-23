@@ -6,7 +6,7 @@ import "@tensorflow/tfjs-react-native";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import * as FileSystem from "expo-file-system";
 
-import PhotoButton from "../components/PhotoButton/PhotoButton";
+import PhotoButton from "../components/PhotoButton";
 import { base64ImageToTensor } from "../util/image";
 
 const CameraView = (): JSX.Element => {
