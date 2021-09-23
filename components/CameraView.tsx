@@ -15,6 +15,7 @@ const CameraView = (): JSX.Element => {
 	const [objectDetectionPreidictions, setObjectDetectionPreidictions] =
 		useState<cocoSsd.DetectedObject[]>();
 	const [status, setStatus] = useState<string>("Waiting for image");
+	const [objDetectModel, setObjDetectModel] = useState<cocoSsd.ObjectDetection>();
 
 	const onPressPhotoButton = async (): Promise<void> => {
 		try {
@@ -31,10 +32,8 @@ const CameraView = (): JSX.Element => {
 			setStatus("Processing...");
 			const imageTensor: tf.Tensor3D = base64ImageToTensor(buffer);
 
-			setStatus("Loading object detection model...");
-			const objectDetection = await cocoSsd.load();
 			setStatus("Detecting objects...");
-			const predictions = await objectDetection.detect(imageTensor);
+			const predictions = await objDetectModel?.detect(imageTensor);
 			setObjectDetectionPreidictions(predictions);
 			setStatus(`objects: ${JSON.stringify(objectDetectionPreidictions)}`);
 		} catch (e) {
@@ -58,9 +57,18 @@ const CameraView = (): JSX.Element => {
 				}
 			}
 
+			setStatus("Waiting for tensorflow to be ready...");
 			await tf.ready();
+
+			if (!objDetectModel) {
+				setStatus("Loading object detection model...");
+				const objectDetection = await cocoSsd.load();
+				setObjDetectModel(objectDetection);
+
+				setStatus("Waiting for image");
+			}
 		})();
-	});
+	}, []);
 
 	return (
 		<View style={styles.container}>
