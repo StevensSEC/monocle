@@ -17,6 +17,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn
+      - name: Type Check
+        run: yarn run tsc --noEmit
       - name: Check for conflicting rules
         run: ./scripts/check_lint_rule_conflicts.sh
       - name: Check linting
