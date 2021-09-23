@@ -17,21 +17,32 @@ const CameraView = (): JSX.Element => {
 	const [status, setStatus] = useState<string>("Waiting for image");
 
 	const onPressPhotoButton = async (): Promise<void> => {
-		const picture = await ref?.takePictureAsync();
-		setLastImageURI(picture?.uri);
+		try {
+			const picture = await ref?.takePictureAsync();
+			if (!picture?.uri) {
+				throw new Error("No picture");
+			}
+			setLastImageURI(picture?.uri);
 
-		setStatus("Processing...");
-		const buffer = await FileSystem.readAsStringAsync(picture?.uri ?? "", {
-			encoding: FileSystem.EncodingType.Base64,
-		});
-		const imageTensor: tf.Tensor3D = base64ImageToTensor(buffer);
+			setStatus("Reading...");
+			const buffer = await FileSystem.readAsStringAsync(picture.uri, {
+				encoding: FileSystem.EncodingType.Base64,
+			});
+			setStatus("Processing...");
+			const imageTensor: tf.Tensor3D = base64ImageToTensor(buffer);
 
-		setStatus("Loading object detection model...");
-		const objectDetection = await cocoSsd.load();
-		setStatus("Detecting objects...");
-		const predictions = await objectDetection.detect(imageTensor);
-		setObjectDetectionPreidictions(predictions);
-		setStatus(`objects: ${JSON.stringify(objectDetectionPreidictions)}`);
+			setStatus("Loading object detection model...");
+			const objectDetection = await cocoSsd.load();
+			setStatus("Detecting objects...");
+			const predictions = await objectDetection.detect(imageTensor);
+			setObjectDetectionPreidictions(predictions);
+			setStatus(`objects: ${JSON.stringify(objectDetectionPreidictions)}`);
+		} catch (e) {
+			if (e instanceof Error) {
+				setStatus(`Error: ${e.message}`);
+			}
+			throw e;
+		}
 	};
 
 	useEffect((): void => {
