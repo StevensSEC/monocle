@@ -8,6 +8,7 @@ import * as FileSystem from "expo-file-system";
 
 import PhotoButton from "../components/PhotoButton";
 import { base64ImageToTensor } from "../util/image";
+import { GOCR } from "../util/gocr.js";
 
 const CameraView = (): JSX.Element => {
 	const [ref, setRef] = useState<Camera | null>();
@@ -35,7 +36,16 @@ const CameraView = (): JSX.Element => {
 			setStatus("Detecting objects...");
 			const predictions = await objDetectModel?.detect(imageTensor);
 			setObjectDetectionPreidictions(predictions);
-			setStatus(`objects: ${JSON.stringify(objectDetectionPreidictions)}`);
+
+			setStatus("Reading text...");
+			const data = {
+				data: Uint8ClampedArray.from((await imageTensor.array()).flat(2)),
+				height: imageTensor.shape[0],
+				width: imageTensor.shape[1],
+			};
+			const text = GOCR(data);
+
+			setStatus(`objects: ${JSON.stringify(objectDetectionPreidictions)} text: ${text}`);
 		} catch (e) {
 			if (e instanceof Error) {
 				setStatus(`Error: ${e.message}`);
