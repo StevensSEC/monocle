@@ -2,8 +2,8 @@ import React from "react";
 import { Button } from "react-native";
 
 interface FlashButtonProps {
-    onPress: VoidFunction;
-    color: string;
+	onPress: VoidFunction;
+	color: string;
 }
 
 const FlashButton = (props: FlashButtonProps): JSX.Element => {
