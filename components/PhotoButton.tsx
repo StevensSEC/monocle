@@ -1,19 +1,26 @@
 import React from "react";
-import { Button } from "react-native";
+import { Text, StyleSheet, Pressable } from "react-native";
 interface PhotoButtonProps {
 	onPress: VoidFunction;
-	color: string;
 }
 
 const PhotoButton = (props: PhotoButtonProps): JSX.Element => {
 	return (
-		<Button
-			onPress={props.onPress}
-			title=""
-			color={props.color}
-			accessibilityLabel="Take photo"
-		/>
+		<Pressable onPress={props.onPress} style={styles.button}>
+			<Text>Take Photo</Text>
+		</Pressable>
 	);
 };
+
+const styles = StyleSheet.create({
+	button: {
+		borderColor: "#000000",
+		borderWidth: 2,
+		borderRadius: 10,
+		margin: 20,
+		padding: 20,
+		textAlign: "center",
+	},
+});
 
 export default PhotoButton;

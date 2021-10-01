@@ -16,3 +16,5 @@ data/**/*.png
 
 # macOS
 .DS_Store
+
+*.icloud
