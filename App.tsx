@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import CameraScreen from "./screens/CameraScreen";
-import TranscriptionScreen from "./screens/TranscriptionScreen";
+import CameraView from "./components/CameraView";
+import TranscriptionView from "./screens/TranscriptionView";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import * as tf from "@tensorflow/tfjs";
 import "@tensorflow/tfjs-react-native";
 import { Text, StyleSheet, View } from "react-native";
+import ProcessingView from "./screens/ProcessingView";
 
 export type RootStackProps = {
 	Camera: {
@@ -14,6 +15,9 @@ export type RootStackProps = {
 		objectModel: cocoSsd.ObjectDetection;
 	};
 	Transcription: {
+		results: string;
+	};
+	Processing: {
 		latestImagePath: string;
 		objectModel: cocoSsd.ObjectDetection;
 	};
@@ -57,12 +61,13 @@ const App = (): JSX.Element => {
 					<RootStack.Group screenOptions={{ headerShown: false }}>
 						<RootStack.Screen
 							name="Camera"
-							component={CameraScreen}
+							component={CameraView}
 							initialParams={{ objectModel: objDetectModel }}
 						/>
 					</RootStack.Group>
 					<RootStack.Group screenOptions={{ presentation: "modal", headerShown: false }}>
-						<RootStack.Screen name="Transcription" component={TranscriptionScreen} />
+						<RootStack.Screen name="Processing" component={ProcessingView} />
+						<RootStack.Screen name="Transcription" component={TranscriptionView} />
 					</RootStack.Group>
 				</RootStack.Navigator>
 			</NavigationContainer>

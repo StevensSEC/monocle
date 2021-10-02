@@ -16,7 +16,7 @@ const CameraView = ({ route, navigation }: CameraProps): JSX.Element => {
 			throw new Error("No picture");
 		}
 
-		navigation.navigate("Transcription", {
+		navigation.navigate("Processing", {
 			latestImagePath: picture.uri,
 			objectModel: route.params.objectModel,
 		});

@@ -18,3 +18,4 @@ data/**/*.png
 .DS_Store
 
 *.icloud
+yarn-error.log

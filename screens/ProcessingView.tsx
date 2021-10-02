@@ -8,9 +8,9 @@ import "@tensorflow/tfjs-react-native";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import * as FileSystem from "expo-file-system";
 
-type TranscriptionProps = StackScreenProps<RootStackProps, "Transcription">;
+type ProcessingProps = StackScreenProps<RootStackProps, "Processing">;
 
-const TranscriptionScreen = ({ navigation, route }: TranscriptionProps): JSX.Element => {
+const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => {
 	const [objectDetectionPreidictions, setObjectDetectionPreidictions] =
 		useState<cocoSsd.DetectedObject[]>();
 	const [status, setStatus] = useState<string>("Waiting for image");
@@ -28,7 +28,9 @@ const TranscriptionScreen = ({ navigation, route }: TranscriptionProps): JSX.Ele
 			setStatus("Detecting objects...");
 			const predictions = await route.params.objectModel?.detect(imageTensor);
 			setObjectDetectionPreidictions(predictions);
-			setStatus(`Objects: ${JSON.stringify(objectDetectionPreidictions)}`);
+            navigation.navigate("Transcription", {
+                results: `Objects: ${JSON.stringify(objectDetectionPreidictions)}`
+            })
 		};
 
 		handleImage().catch(err => {
@@ -47,12 +49,6 @@ const TranscriptionScreen = ({ navigation, route }: TranscriptionProps): JSX.Ele
 				</Text>
 			</Pressable>
 			<Text>Status: {status}</Text>
-			<Button
-				onPress={() => {
-					navigation.goBack();
-				}}
-				title="Go Back"
-			/>
 		</View>
 	);
 };
@@ -66,4 +62,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default TranscriptionScreen;
+export default ProcessingView;
