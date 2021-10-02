@@ -48,19 +48,5 @@
 		"ts-node": "^10.2.1",
 		"typescript": "~4.0.0"
 	},
-	"jest": {
-		"projects": [
-			{
-				"preset": "jest-expo/ios"
-			},
-			{
-				"preset": "jest-expo/android"
-			}
-		],
-		"transformIgnorePatterns": [
-			"node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
-		],
-		"testEnvironment": "node"
-	},
 	"private": true
 }
