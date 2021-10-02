@@ -1,47 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Camera } from "expo-camera";
-import * as tf from "@tensorflow/tfjs";
-import "@tensorflow/tfjs-react-native";
-import * as cocoSsd from "@tensorflow-models/coco-ssd";
-import * as FileSystem from "expo-file-system";
-
 import PhotoButton from "../components/PhotoButton";
-import { base64ImageToTensor } from "../util/image";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackProps } from "../App";
 
-const CameraView = (): JSX.Element => {
+type CameraProps = StackScreenProps<RootStackProps, "Camera">;
+
+const CameraView = ({ route, navigation }: CameraProps): JSX.Element => {
 	const [ref, setRef] = useState<Camera | null>();
-	const [lastImageURI, setLastImageURI] = useState<string>();
-	const [objectDetectionPreidictions, setObjectDetectionPreidictions] =
-		useState<cocoSsd.DetectedObject[]>();
-	const [status, setStatus] = useState<string>("Waiting for image");
-	const [objDetectModel, setObjDetectModel] = useState<cocoSsd.ObjectDetection>();
 
 	const onPressPhotoButton = async (): Promise<void> => {
-		try {
-			const picture = await ref?.takePictureAsync();
-			if (!picture?.uri) {
-				throw new Error("No picture");
-			}
-			setLastImageURI(picture?.uri);
-
-			setStatus("Reading...");
-			const buffer = await FileSystem.readAsStringAsync(picture.uri, {
-				encoding: FileSystem.EncodingType.Base64,
-			});
-			setStatus("Processing...");
-			const imageTensor: tf.Tensor3D = base64ImageToTensor(buffer);
-
-			setStatus("Detecting objects...");
-			const predictions = await objDetectModel?.detect(imageTensor);
-			setObjectDetectionPreidictions(predictions);
-			setStatus(`objects: ${JSON.stringify(objectDetectionPreidictions)}`);
-		} catch (e) {
-			if (e instanceof Error) {
-				setStatus(`Error: ${e.message}`);
-			}
-			throw e;
+		const picture = await ref?.takePictureAsync();
+		if (!picture?.uri) {
+			throw new Error("No picture");
 		}
+
+		navigation.navigate("Processing", {
+			latestImagePath: picture.uri,
+			objectModel: route.params.objectModel,
+		});
 	};
 
 	useEffect((): void => {
@@ -56,17 +34,6 @@ const CameraView = (): JSX.Element => {
 					break;
 				}
 			}
-
-			setStatus("Waiting for tensorflow to be ready...");
-			await tf.ready();
-
-			if (!objDetectModel) {
-				setStatus("Loading object detection model...");
-				const objectDetection = await cocoSsd.load();
-				setObjDetectModel(objectDetection);
-
-				setStatus("Waiting for image");
-			}
 		})();
 	}, []);
 
@@ -79,10 +46,7 @@ const CameraView = (): JSX.Element => {
 				style={{ flex: 1 }}
 				type={Camera.Constants.Type.back}
 			/>
-			<PhotoButton onPress={onPressPhotoButton} color="#f4e1e6" />
-			{/* FIXME: temporary, remove when we have actual UI */}
-			<Text>{lastImageURI}</Text>
-			<Text>{status}</Text>
+			<PhotoButton onPress={onPressPhotoButton} />
 		</View>
 	);
 };

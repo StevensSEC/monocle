@@ -7,7 +7,10 @@ This is intended to serve as a "table of contents" for each file in this project
 `.github` - a directory containing files used by Github  
 -| `workflows` - a directory containing our Github workflows - actions for Github to perform on our repository automatically. This is used for setting up continuous integration (CI) and continuous deployment (CD).  
 `.husky` - a folder for the module "husky". husky let's us set up git "hooks" - things that are run automatically when certain git actions are performed  
-`assets` - contains "assets" for the app - images, sounds, etc.  
+`assets` - contains "assets" for the app - images, sounds, etc.
+`screens` - contains the parent views for use with react-navigation
+-| `CameraScreen.tsx` - Contains CameraView
+-| `TranscriptionView.tsx` - Handles the processing of the image and does the object detection
 `components` - these contain our custom React components and views. This is the main visual backbone of the app, as components are used to build views, and views are switched between to create the system known as the app. If a custom graphical component is displayed, odds are the source for it can be found in here.  
 -| `CameraView.tsx` - source code for the view the user sees while trying to take a photo  
 -| `PhotoButton.tsx` - source code for our custom button the user presses to take photos  
