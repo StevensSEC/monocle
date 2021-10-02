@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import CameraView from "./components/CameraView";
-import TranscriptionView from "./screens/TranscriptionView";
+import TranscriptionView from "./components/TranscriptionView";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import * as tf from "@tensorflow/tfjs";
 import "@tensorflow/tfjs-react-native";
 import { Text, StyleSheet, View } from "react-native";
-import ProcessingView from "./screens/ProcessingView";
+import ProcessingView from "./components/ProcessingView";
 
 export type RootStackProps = {
 	Camera: {
