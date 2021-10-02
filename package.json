@@ -8,6 +8,7 @@
 		"eject": "expo eject",
 		"lint": "tsc --noEmit && eslint --config .eslintrc.js --fix . && prettier --config prettier.config.js --write **/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}",
 		"lint-check": "tsc --noEmit && eslint --config .eslintrc.js . && prettier --config prettier.config.js --check **/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}",
+		"lint-staged": "tsc --noEmit && pretty-quick --staged && lint-staged",
 		"prepare": "husky install"
 	},
 	"dependencies": {
@@ -42,6 +43,9 @@
 		"prettier": "^2.3.2",
 		"pretty-quick": "^3.1.1",
 		"typescript": "~4.0.0"
+	},
+	"lint-staged": {
+		"*.{ts,js}": "eslint --cache --fix"
 	},
 	"private": true
 }
