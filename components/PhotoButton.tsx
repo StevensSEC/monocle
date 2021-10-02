@@ -6,7 +6,7 @@ interface PhotoButtonProps {
 
 const PhotoButton = (props: PhotoButtonProps): JSX.Element => {
 	return (
-		<Pressable onPress={props.onPress} style={styles.button}>
+		<Pressable onPress={props.onPress} style={styles.button} accessibilityLabel="Take photo">
 			<Text>Take Photo</Text>
 		</Pressable>
 	);
