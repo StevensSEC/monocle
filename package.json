@@ -6,6 +6,7 @@
 		"ios": "expo start --ios",
 		"web": "expo start --web",
 		"eject": "expo eject",
+		"test": "jest",
 		"lint": "tsc --noEmit && eslint --config .eslintrc.js --fix . && prettier --config prettier.config.js --write **/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}",
 		"lint-check": "tsc --noEmit && eslint --config .eslintrc.js . && prettier --config prettier.config.js --check **/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}",
 		"prepare": "husky install"
@@ -29,8 +30,11 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.9.0",
+		"@testing-library/react-native": "^7.2.0",
+		"@types/jest": "^27.0.2",
 		"@types/react": "~16.9.35",
 		"@types/react-native": "^0.65.0",
+		"@types/react-test-renderer": "^17.0.1",
 		"@typescript-eslint/eslint-plugin": "^4.31.0",
 		"@typescript-eslint/parser": "^4.31.0",
 		"eslint": "^7.32.0",
@@ -38,8 +42,17 @@
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-react": "^7.25.1",
 		"husky": "^7.0.2",
+		"jest-expo": "^42.1.0",
 		"prettier": "^2.3.2",
+		"react-test-renderer": "^17.0.2",
 		"typescript": "~4.0.0"
+	},
+	"jest": {
+		"preset": "jest-expo",
+		"transformIgnorePatterns": [
+			"node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+		],
+		"testEnvironment": "node"
 	},
 	"private": true
 }
