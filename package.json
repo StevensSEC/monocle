@@ -6,8 +6,8 @@
 		"ios": "expo start --ios",
 		"web": "expo start --web",
 		"eject": "expo eject",
-		"lint": "tsc --noEmit && eslint --config .eslintrc.js --fix . && prettier --config prettier.config.js --write **/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}",
-		"lint-check": "tsc --noEmit && eslint --config .eslintrc.js . && prettier --config prettier.config.js --check **/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}",
+		"lint": "tsc --noEmit && eslint --config .eslintrc.js --fix . && prettier --config prettier.config.js --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}\"",
+		"lint-check": "tsc --noEmit && eslint --config .eslintrc.js --fix . && prettier --config prettier.config.js --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}\"",
 		"prepare": "husky install"
 	},
 	"dependencies": {
