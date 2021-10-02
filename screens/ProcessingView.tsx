@@ -1,6 +1,6 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Button, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import { RootStackProps } from "../App";
 import { base64ImageToTensor } from "../util/image";
 import * as tf from "@tensorflow/tfjs";
@@ -28,9 +28,9 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 			setStatus("Detecting objects...");
 			const predictions = await route.params.objectModel?.detect(imageTensor);
 			setObjectDetectionPreidictions(predictions);
-            navigation.navigate("Transcription", {
-                results: `Objects: ${JSON.stringify(objectDetectionPreidictions)}`
-            })
+			navigation.navigate("Transcription", {
+				results: `Objects: ${JSON.stringify(objectDetectionPreidictions)}`,
+			});
 		};
 
 		handleImage().catch(err => {

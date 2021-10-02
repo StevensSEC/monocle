@@ -1,17 +1,11 @@
 import { StackScreenProps } from "@react-navigation/stack";
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Button, Pressable } from "react-native";
+import React from "react";
+import { StyleSheet, View, Text, Button } from "react-native";
 import { RootStackProps } from "../App";
-import { base64ImageToTensor } from "../util/image";
-import * as tf from "@tensorflow/tfjs";
-import "@tensorflow/tfjs-react-native";
-import * as cocoSsd from "@tensorflow-models/coco-ssd";
-import * as FileSystem from "expo-file-system";
 
 type TranscriptionProps = StackScreenProps<RootStackProps, "Transcription">;
 
 const TranscriptionView = ({ navigation, route }: TranscriptionProps): JSX.Element => {
-	
 	return (
 		<View style={styles.container}>
 			<Text>Status: {route.params.results}</Text>
