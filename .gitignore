@@ -16,3 +16,6 @@ data/**/*.png
 
 # macOS
 .DS_Store
+
+*.icloud
+yarn-error.log
