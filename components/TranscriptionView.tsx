@@ -9,7 +9,6 @@ type TranscriptionProps = StackScreenProps<RootStackProps, "Transcription">;
 const TranscriptionView = ({ navigation, route }: TranscriptionProps): JSX.Element => {
 	return (
 		<View style={styles.container}>
-			<Text>Status: {route.params.results}</Text>
 			<ResultContainer defaultText={route.params.results} />
 			<Button
 				onPress={() => {
