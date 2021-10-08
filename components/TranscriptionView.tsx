@@ -10,7 +10,7 @@ const TranscriptionView = ({ navigation, route }: TranscriptionProps): JSX.Eleme
 	return (
 		<View style={styles.container}>
 			<Text>Status: {route.params.results}</Text>
-			<ResultContainer defaultText={"Hello World!"} />
+			<ResultContainer defaultText={route.params.results} />
 			<Button
 				onPress={() => {
 					navigation.pop(2);
