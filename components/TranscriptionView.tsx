@@ -2,7 +2,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import React from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { RootStackProps } from "../App";
-import ResultTextbox from "../components/ResultTextbox";
+import ResultContainer from "./ResultContainer";
 
 type TranscriptionProps = StackScreenProps<RootStackProps, "Transcription">;
 
@@ -10,7 +10,7 @@ const TranscriptionView = ({ navigation, route }: TranscriptionProps): JSX.Eleme
 	return (
 		<View style={styles.container}>
 			<Text>Status: {route.params.results}</Text>
-			<ResultTextbox defaultText={"Hello World!"} />
+			<ResultContainer defaultText={"Hello World!"} />
 			<Button
 				onPress={() => {
 					navigation.pop(2);
