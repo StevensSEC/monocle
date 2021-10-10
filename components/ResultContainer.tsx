@@ -1,6 +1,14 @@
 import { RotateWithOffset } from "@tensorflow/tfjs-core";
 import React, { useState } from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+	Pressable,
+	SafeAreaView,
+	StyleSheet,
+	Text,
+	TextInput,
+	View,
+	ViewStyle,
+} from "react-native";
 import * as Clipboard from "expo-clipboard";
 
 interface ResultContainerProps {
@@ -9,8 +17,8 @@ interface ResultContainerProps {
 
 const ResultContainer = ({ defaultText }: ResultContainerProps): JSX.Element => {
 	const [result, changeResult] = useState<string>(defaultText);
-	const [copyButtonStyle, changeCopyButtonStyle] = useState<Object>(styles.copyButton);
-	const [resetButtonStyle, changeResetButtonStyle] = useState<Object>(styles.resetButton);
+	const [copyButtonStyle, changeCopyButtonStyle] = useState<ViewStyle>(styles.copyButton);
+	const [resetButtonStyle, changeResetButtonStyle] = useState<ViewStyle>(styles.resetButton);
 
 	const copyResultToClipboard = (result: string): void => {
 		Clipboard.setString(result);
