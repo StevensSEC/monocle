@@ -1,5 +1,7 @@
+import { RotateWithOffset } from "@tensorflow/tfjs-core";
 import React, { useState } from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text, TextInput } from "react-native";
+import { Button, SafeAreaView, StyleSheet, TextInput, View } from "react-native";
+import * as Clipboard from "expo-clipboard";
 
 interface ResultContainerProps {
 	defaultText: string;
@@ -7,6 +9,11 @@ interface ResultContainerProps {
 
 const ResultContainer = ({ defaultText }: ResultContainerProps): JSX.Element => {
 	const [result, changeResult] = useState<string>(defaultText);
+
+	const copyResultToClipboard = (result: string): void => {
+		Clipboard.setString(result);
+	};
+
 	return (
 		<SafeAreaView>
 			<TextInput
@@ -17,17 +24,27 @@ const ResultContainer = ({ defaultText }: ResultContainerProps): JSX.Element => 
 				multiline={true}
 				numberOfLines={5}
 				autoCapitalize="none"
+				accessibilityRole="text"
 				accessibilityLabel={"Transcription Result is... " + result}
 			/>
-			<Pressable
-				onPress={() => {
-					changeResult(defaultText);
-				}}
-				style={styles.resetButton}
-				accessibilityLabel={"Reset text in box back to detected results"}
-			>
-				<Text style={styles.resetButtonText}>Reset Text</Text>
-			</Pressable>
+			<View style={styles.horizontalContainer}>
+				<Button
+					onPress={() => {
+						copyResultToClipboard(result);
+					}}
+					title="Copy to Clipboard"
+					color="#777711"
+					accessibilityLabel={"Copy text in box to your device's clipboard"}
+				/>
+				<Button
+					onPress={() => {
+						changeResult(defaultText);
+					}}
+					title="Reset Text"
+					color="#bb2222"
+					accessibilityLabel={"Reset text in box back to detected results"}
+				/>
+			</View>
 		</SafeAreaView>
 	);
 };
@@ -38,25 +55,15 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		padding: 2,
 		margin: 2,
-		marginTop: 20,
+		marginTop: 250,
 		textAlign: "center",
 		textAlignVertical: "center",
 	},
 
-	resetButton: {
-		backgroundColor: "#bb2222",
-		borderColor: "#000000",
-		borderWidth: 2,
-		borderRadius: 20,
+	horizontalContainer: {
+		flexDirection: "row",
+		justifyContent: "space-around",
 		padding: 20,
-		marginVertical: 20,
-		marginHorizontal: 120,
-	},
-
-	resetButtonText: {
-		color: "#ffffff",
-		textAlign: "center",
-		textAlignVertical: "center",
 	},
 });
 
