@@ -1,5 +1,6 @@
 import express from "express";
 import { createWorker } from "tesseract.js";
+import multer from "multer";
 
 const worker = createWorker({
 	logger: m => console.log(m),
@@ -9,15 +10,13 @@ void (async () => {
 	await worker.load();
 	await worker.loadLanguage("eng");
 	await worker.initialize("eng");
-	const {
-		data: { text },
-	} = await worker.recognize("https://tesseract.projectnaptha.com/img/eng_bw.png");
-	console.log(text);
-	await worker.terminate();
 })();
 
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
 // TODO: move these interfaces to a seperate module so that they can be reused on the client side.
-interface ResponseSuccess<T> {
+interface ResponseSuccess<T = undefined> {
 	success: true;
 	result: T;
 }
@@ -30,9 +29,25 @@ interface ResponseError {
 	};
 }
 
-export type MonocleApiResponse<T> = ResponseSuccess<T> | ResponseError;
+export type MonocleApiResponse<T = undefined> = ResponseSuccess<T> | ResponseError;
 
 export const apirouter = express.Router();
-apirouter.post("/upload", (req, res) => {
-	res.send("Hello World!");
+apirouter.post("/upload", upload.single("image"), async (req, res) => {
+	if (!req.file || !req.file?.buffer) {
+		const resp: MonocleApiResponse = {
+			success: false,
+			error: {
+				name: "MissingImage",
+				message: "No image was provided",
+			},
+		};
+		res.json(resp);
+		return;
+	}
+	const result = await worker.recognize(req.file?.buffer);
+	const resp: MonocleApiResponse<string> = {
+		success: true,
+		result: result.data.text,
+	};
+	res.json(resp);
 });
