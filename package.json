@@ -8,6 +8,7 @@
 		"eject": "expo eject",
 		"lint": "tsc --noEmit && eslint --config .eslintrc.js --fix . && prettier --config prettier.config.js --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}\"",
 		"lint-check": "tsc --noEmit && eslint --config .eslintrc.js . && prettier --config prettier.config.js --check \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}\"",
+		"lint-staged": "tsc --noEmit && pretty-quick --staged && lint-staged",
 		"prepare": "husky install"
 	},
 	"dependencies": {
@@ -19,6 +20,7 @@
 		"@tensorflow/tfjs-react-native": "^0.7.0",
 		"expo": "~42.0.1",
 		"expo-camera": "~11.2.2",
+		"expo-clipboard": "^1.1.0",
 		"expo-gl": "^10.4.2",
 		"expo-gl-cpp": "^10.4.1",
 		"expo-status-bar": "~1.0.4",
@@ -34,8 +36,20 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.9.0",
+		"@types/istanbul-lib-report": "^3.0.0",
+		"@types/istanbul-reports": "^3.0.1",
+		"@types/json-schema": "^7.0.9",
+		"@types/node-fetch": "^3.0.3",
+		"@types/offscreencanvas": "^2019.6.4",
+		"@types/prop-types": "^15.7.4",
 		"@types/react": "^17.0.26",
 		"@types/react-native": "^0.65.0",
+		"@types/scheduler": "^0.16.2",
+		"@types/seedrandom": "^3.0.1",
+		"@types/stack-utils": "^2.0.1",
+		"@types/webgl2": "^0.0.6",
+		"@types/yargs": "^17.0.3",
+		"@types/yargs-parser": "^20.2.1",
 		"@typescript-eslint/eslint-plugin": "^4.31.0",
 		"@typescript-eslint/parser": "^4.31.0",
 		"eslint": "^7.32.0",
@@ -43,20 +57,13 @@
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-react": "^7.25.1",
 		"husky": "^7.0.2",
+		"lint-staged": "^11.1.2",
 		"prettier": "^2.3.2",
-		"typescript": "~4.0.0",
-		"@types/istanbul-lib-report": "^3.0.0",
-		"@types/istanbul-reports": "^3.0.1",
-		"@types/json-schema": "^7.0.9",
-		"@types/node-fetch": "^3.0.3",
-		"@types/offscreencanvas": "^2019.6.4",
-		"@types/prop-types": "^15.7.4",
-		"@types/scheduler": "^0.16.2",
-		"@types/seedrandom": "^3.0.1",
-		"@types/stack-utils": "^2.0.1",
-		"@types/webgl2": "^0.0.6",
-		"@types/yargs": "^17.0.3",
-		"@types/yargs-parser": "^20.2.1"
+		"pretty-quick": "^3.1.1",
+		"typescript": "~4.0.0"
+	},
+	"lint-staged": {
+		"*.{ts,js}": "eslint --cache --fix"
 	},
 	"private": true
 }

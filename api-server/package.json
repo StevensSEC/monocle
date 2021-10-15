@@ -1,0 +1,31 @@
+{
+	"name": "monocle-api-server",
+	"version": "0",
+	"main": "main.ts",
+	"license": "AGPL3.0-OR-LATER",
+	"private": true,
+	"scripts": {
+		"start": "api start",
+		"api": "ts-node main.ts",
+		"lint": "tsc --noEmit && eslint --config .eslintrc.js --fix ."
+	},
+	"dependencies": {
+		"@useoptic/cli": "^10.3.0",
+		"@useoptic/express-middleware": "^0.0.5",
+		"express": "^4.17.1",
+		"multer": "^1.4.3",
+		"tesseract.js": "^2.1.5",
+		"ts-node": "^10.3.0"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.13",
+		"@types/multer": "^1.4.7",
+		"@typescript-eslint/eslint-plugin": "^4.31.0",
+		"@typescript-eslint/parser": "^4.31.0",
+		"eslint": "^7.32.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"prettier": "^2.4.1",
+		"typescript": "~4.0.0"
+	}
+}

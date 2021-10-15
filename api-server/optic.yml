@@ -1,0 +1,5 @@
+name: "monocle-api"
+tasks:
+  start:
+    command: yarn run api
+    inboundUrl: http://localhost:3000
