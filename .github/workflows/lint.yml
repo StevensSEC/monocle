@@ -25,3 +25,20 @@ jobs:
         run: npx eslint --config .eslintrc.js .
       - name: Check format
         run: npx prettier --config prettier.config.js --check "**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}"
+  lint-api-server:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn
+        working-directory: api-server
+      - run: yarn run tsc --noEmit
+        working-directory: api-server
