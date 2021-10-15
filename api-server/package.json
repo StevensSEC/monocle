@@ -8,6 +8,7 @@
 		"start": "ts-node main.ts"
 	},
 	"dependencies": {
+		"@useoptic/express-middleware": "^0.0.5",
 		"express": "^4.17.1",
 		"tesseract.js": "^2.1.5",
 		"ts-node": "^10.3.0"

@@ -19,3 +19,4 @@ data/**/*.png
 
 *.icloud
 yarn-error.log
+**/.eslintcache
