@@ -10,10 +10,12 @@
 	"dependencies": {
 		"@useoptic/express-middleware": "^0.0.5",
 		"express": "^4.17.1",
+		"multer": "^1.4.3",
 		"tesseract.js": "^2.1.5",
 		"ts-node": "^10.3.0"
 	},
 	"devDependencies": {
-		"@types/express": "^4.17.13"
+		"@types/express": "^4.17.13",
+		"@types/multer": "^1.4.7"
 	}
 }
