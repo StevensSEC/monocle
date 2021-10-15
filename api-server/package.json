@@ -5,9 +5,11 @@
 	"license": "AGPL3.0-OR-LATER",
 	"private": true,
 	"scripts": {
-		"start": "ts-node main.ts"
+		"start": "api start",
+		"api": "ts-node main.ts"
 	},
 	"dependencies": {
+		"@useoptic/cli": "^10.3.0",
 		"@useoptic/express-middleware": "^0.0.5",
 		"express": "^4.17.1",
 		"multer": "^1.4.3",

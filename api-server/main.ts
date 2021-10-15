@@ -7,6 +7,7 @@ const app = express() as Express;
 app.use(
 	OpticMiddleware({
 		enabled: process.env.NODE_ENV !== "production",
+		log: true,
 	})
 );
 app.use("/api", apirouter);
