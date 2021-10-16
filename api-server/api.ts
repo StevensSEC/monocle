@@ -42,7 +42,7 @@ apirouter.get("/status", (req, res) => {
 		success: true,
 		result: status,
 	};
-	res.json();
+	res.json(resp);
 });
 
 apirouter.post("/upload", upload.single("image"), async (req, res) => {
