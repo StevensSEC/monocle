@@ -6,10 +6,14 @@ const worker = createWorker({
 	logger: m => console.log(m),
 });
 
+let status: string = "starting...";
+
 void (async () => {
+	status = "loading tesseract";
 	await worker.load();
 	await worker.loadLanguage("eng");
 	await worker.initialize("eng");
+	status = "ready";
 })();
 
 const storage = multer.memoryStorage();
@@ -32,6 +36,15 @@ interface ResponseError {
 export type MonocleApiResponse<T = undefined> = ResponseSuccess<T> | ResponseError;
 
 export const apirouter = express.Router();
+
+apirouter.get("/status", (req, res) => {
+	const resp: MonocleApiResponse<string> = {
+		success: true,
+		result: status,
+	};
+	res.json(resp);
+});
+
 apirouter.post("/upload", upload.single("image"), async (req, res) => {
 	if (!req.file || !req.file?.buffer) {
 		const resp: MonocleApiResponse = {
