@@ -1,6 +1,6 @@
 {
 	"name": "monocle-api-server",
-	"version": "0",
+	"version": "0.1.0",
 	"main": "main.ts",
 	"license": "AGPL3.0-OR-LATER",
 	"private": true,
