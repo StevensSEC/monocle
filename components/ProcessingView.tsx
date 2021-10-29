@@ -2,17 +2,14 @@ import { StackScreenProps } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { RootStackProps } from "../App";
-import { base64ImageToTensor } from "../util/image";
-import * as tf from "@tensorflow/tfjs";
-import "@tensorflow/tfjs-react-native";
-import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import * as FileSystem from "expo-file-system";
+import axios from "axios";
+
+const SERVER_URL = "https://sec-monocle.herokuapp.com/";
 
 type ProcessingProps = StackScreenProps<RootStackProps, "Processing">;
 
 const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => {
-	const [objectDetectionPreidictions, setObjectDetectionPreidictions] =
-		useState<cocoSsd.DetectedObject[]>();
 	const [status, setStatus] = useState<string>("Waiting for image");
 	const [showFilePath, setShowFilePath] = useState<boolean>(false);
 
@@ -22,14 +19,12 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 			const buffer = await FileSystem.readAsStringAsync(route.params.latestImagePath, {
 				encoding: FileSystem.EncodingType.Base64,
 			});
-			setStatus("Processing...");
-			const imageTensor: tf.Tensor3D = base64ImageToTensor(buffer);
+			setStatus("Sending to server...");
+			const { data } = await axios.post<string>(`${SERVER_URL}/upload`, buffer);
 
-			setStatus("Detecting objects...");
-			const predictions = await route.params.objectModel?.detect(imageTensor);
-			setObjectDetectionPreidictions(predictions);
+			setStatus("Done");
 			navigation.navigate("Transcription", {
-				results: `Objects: ${JSON.stringify(objectDetectionPreidictions)}`,
+				results: `Objects: ${JSON.stringify(data)}`,
 			});
 		};
 
