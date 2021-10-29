@@ -20,7 +20,7 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 				encoding: FileSystem.EncodingType.Base64,
 			});
 			setStatus("Sending to server...");
-			const { data } = await axios.post<string>(`${SERVER_URL}/upload`, buffer);
+			const { data } = await axios.post<string>(`${SERVER_URL}/api/upload`, buffer);
 
 			setStatus("Done");
 			navigation.navigate("Transcription", {
