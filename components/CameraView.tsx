@@ -7,7 +7,7 @@ import { RootStackProps } from "../App";
 
 type CameraProps = StackScreenProps<RootStackProps, "Camera">;
 
-const CameraView = ({ route, navigation }: CameraProps): JSX.Element => {
+const CameraView = ({ navigation }: CameraProps): JSX.Element => {
 	const [ref, setRef] = useState<Camera | null>();
 
 	const onPressPhotoButton = async (): Promise<void> => {
@@ -18,7 +18,6 @@ const CameraView = ({ route, navigation }: CameraProps): JSX.Element => {
 
 		navigation.navigate("Processing", {
 			latestImagePath: picture.uri,
-			objectModel: route.params.objectModel,
 		});
 	};
 
