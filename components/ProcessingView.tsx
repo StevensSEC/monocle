@@ -16,16 +16,26 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 	useEffect(() => {
 		const handleImage = async () => {
 			setStatus("Reading...");
-			const buffer = await FileSystem.readAsStringAsync(route.params.latestImagePath, {
+			const imageAsString = await FileSystem.readAsStringAsync(route.params.latestImagePath, {
 				encoding: FileSystem.EncodingType.Base64,
 			});
-			setStatus("Sending to server...");
-			const { data } = await axios.post<string>(`${SERVER_URL}/api/upload`, buffer);
+			const formData = new FormData();
+			formData.append("image", imageAsString);
 
-			setStatus("Done");
-			navigation.navigate("Transcription", {
-				results: `Objects: ${JSON.stringify(data)}`,
-			});
+			setStatus("Sending to server...");
+			try {
+				const { data } = await axios.post<JSON>(`${SERVER_URL}/api/upload`, formData, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				});
+				setStatus("Done");
+				navigation.navigate("Transcription", {
+					results: `Objects: ${JSON.stringify(data)}`,
+				});
+			} catch (e) {
+				console.log(e);
+			}
 		};
 
 		handleImage().catch(err => {
