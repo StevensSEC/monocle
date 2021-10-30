@@ -17,7 +17,7 @@ void (async () => {
 })();
 
 const storage = multer.memoryStorage();
-const upload = multer({ storage });
+const upload = multer({ storage: storage, limits: { fieldSize: 10 * 1024 * 1024 } });
 
 // TODO: move these interfaces to a seperate module so that they can be reused on the client side.
 interface ResponseSuccess<T = undefined> {
