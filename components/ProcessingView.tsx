@@ -5,7 +5,7 @@ import { RootStackProps } from "../App";
 import * as FileSystem from "expo-file-system";
 import axios from "axios";
 
-const SERVER_URL = "https://sec-monocle.herokuapp.com/";
+const SERVER_URL = "https://sec-monocle.herokuapp.com";
 
 type ProcessingProps = StackScreenProps<RootStackProps, "Processing">;
 
@@ -19,8 +19,9 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 			const imageAsString = await FileSystem.readAsStringAsync(route.params.latestImagePath, {
 				encoding: FileSystem.EncodingType.Base64,
 			});
+			const appendedString = imageAsString + "data:image/png;base64";
 			const formData = new FormData();
-			formData.append("image", imageAsString);
+			formData.append("image", appendedString);
 
 			setStatus("Sending to server...");
 			try {
