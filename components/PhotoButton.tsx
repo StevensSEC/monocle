@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, Pressable, Image, View } from "react-native";
+import { StyleSheet, Pressable, Image, View } from "react-native";
 interface PhotoButtonProps {
 	onPress: VoidFunction;
 }
@@ -15,7 +15,6 @@ const PhotoButton = (props: PhotoButtonProps): JSX.Element => {
 				{/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
 				<Image source={require("../assets/Monocle-Logo-Gray.png")} style={styles.img} />
 			</Pressable>
-			{/* <Text>Take Photo</Text> */}
 		</View>
 	);
 };
