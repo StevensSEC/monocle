@@ -12,6 +12,7 @@ const PhotoButton = (props: PhotoButtonProps): JSX.Element => {
 				style={styles.button}
 				accessibilityLabel="Take photo"
 			>
+				{/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
 				<Image source={require("../assets/Monocle-Logo-Gray.png")} style={styles.img} />
 			</Pressable>
 			{/* <Text>Take Photo</Text> */}
