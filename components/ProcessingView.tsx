@@ -16,12 +16,12 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 	useEffect(() => {
 		const handleImage = async () => {
 			setStatus("Reading...");
-			const imageAsString = await FileSystem.readAsStringAsync(route.params.latestImagePath, {
-				encoding: FileSystem.EncodingType.Base64,
-			});
-			const appendedString = imageAsString + "data:image/png;base64";
 			const formData = new FormData();
-			formData.append("image", appendedString);
+			formData.append("image", {
+				uri: route.params.latestImagePath,
+				name: "image.png",
+				type: "image/png",
+			} as never); // This is actually valid usage, but its not in the type declaration.
 
 			setStatus("Sending to server...");
 			try {
@@ -35,6 +35,7 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 					results: `Objects: ${JSON.stringify(data)}`,
 				});
 			} catch (e) {
+				setStatus("Failed to upload image.");
 				console.log(e);
 			}
 		};
