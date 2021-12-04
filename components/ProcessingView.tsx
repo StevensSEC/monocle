@@ -2,35 +2,43 @@ import { StackScreenProps } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { RootStackProps } from "../App";
-import { base64ImageToTensor } from "../util/image";
-import * as tf from "@tensorflow/tfjs";
-import "@tensorflow/tfjs-react-native";
-import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import * as FileSystem from "expo-file-system";
+import axios from "axios";
+
+const SERVER_URL = "https://sec-monocle.herokuapp.com";
 
 type ProcessingProps = StackScreenProps<RootStackProps, "Processing">;
 
 const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => {
-	const [objectDetectionPreidictions, setObjectDetectionPreidictions] =
-		useState<cocoSsd.DetectedObject[]>();
 	const [status, setStatus] = useState<string>("Waiting for image");
 	const [showFilePath, setShowFilePath] = useState<boolean>(false);
 
 	useEffect(() => {
 		const handleImage = async () => {
 			setStatus("Reading...");
-			const buffer = await FileSystem.readAsStringAsync(route.params.latestImagePath, {
-				encoding: FileSystem.EncodingType.Base64,
+			const formData = new FormData();
+			formData.append("image", {
+				//@ts-expect-error This is actually valid usage, but its not in the type declaration.
+				uri: route.params.latestImagePath,
+				name: "image.png",
+				type: "image/png",
 			});
-			setStatus("Processing...");
-			const imageTensor: tf.Tensor3D = base64ImageToTensor(buffer);
 
-			setStatus("Detecting objects...");
-			const predictions = await route.params.objectModel?.detect(imageTensor);
-			setObjectDetectionPreidictions(predictions);
-			navigation.navigate("Transcription", {
-				results: `Objects: ${JSON.stringify(objectDetectionPreidictions)}`,
-			});
+			setStatus("Sending to server...");
+			try {
+				const { data } = await axios.post<JSON>(`${SERVER_URL}/api/upload`, formData, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				});
+				setStatus("Done");
+				navigation.navigate("Transcription", {
+					results: `Objects: ${JSON.stringify(data)}`,
+				});
+			} catch (e) {
+				setStatus("Failed to upload image.");
+				console.log(e);
+			}
 		};
 
 		handleImage().catch(err => {

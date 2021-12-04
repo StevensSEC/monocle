@@ -1,78 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import CameraView from "./components/CameraView";
 import TranscriptionView from "./components/TranscriptionView";
-import * as cocoSsd from "@tensorflow-models/coco-ssd";
-import * as tf from "@tensorflow/tfjs";
-import "@tensorflow/tfjs-react-native";
-import { Text, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import ProcessingView from "./components/ProcessingView";
 
 export type RootStackProps = {
 	Camera: {
 		filePath: string | undefined;
-		objectModel: cocoSsd.ObjectDetection;
 	};
 	Transcription: {
 		results: string;
 	};
 	Processing: {
 		latestImagePath: string;
-		objectModel: cocoSsd.ObjectDetection;
 	};
 };
 
 const RootStack = createStackNavigator<RootStackProps>();
 
 const App = (): JSX.Element => {
-	const [objDetectModel, setObjDetectModel] = useState<cocoSsd.ObjectDetection>();
-	const [canUseCamera, setCanUseCamera] = useState<boolean>(false);
-	const [status, setStatus] = useState<string>("Loading tensorflow...");
-
-	useEffect(() => {
-		const load = async () => {
-			await tf.ready();
-
-			setStatus("Loading object detection model...(app will be locked until loaded)");
-
-			if (!objDetectModel) {
-				const objectDetection = await cocoSsd.load();
-				setObjDetectModel(objectDetection);
-				setCanUseCamera(true);
-			}
-		};
-
-		load().catch(err => {
-			throw err;
-		});
-	}, []);
-
-	if (!canUseCamera) {
-		return (
-			<View style={styles.container}>
-				<Text>{status}</Text>
-			</View>
-		);
-	} else {
-		return (
-			<NavigationContainer>
-				<RootStack.Navigator initialRouteName="Camera">
-					<RootStack.Group screenOptions={{ headerShown: false }}>
-						<RootStack.Screen
-							name="Camera"
-							component={CameraView}
-							initialParams={{ objectModel: objDetectModel }}
-						/>
-					</RootStack.Group>
-					<RootStack.Group screenOptions={{ presentation: "modal", headerShown: false }}>
-						<RootStack.Screen name="Processing" component={ProcessingView} />
-						<RootStack.Screen name="Transcription" component={TranscriptionView} />
-					</RootStack.Group>
-				</RootStack.Navigator>
-			</NavigationContainer>
-		);
-	}
+	return (
+		<NavigationContainer>
+			<RootStack.Navigator initialRouteName="Camera">
+				<RootStack.Group screenOptions={{ headerShown: false }}>
+					<RootStack.Screen name="Camera" component={CameraView} />
+				</RootStack.Group>
+				<RootStack.Group screenOptions={{ presentation: "modal", headerShown: false }}>
+					<RootStack.Screen name="Processing" component={ProcessingView} />
+					<RootStack.Screen name="Transcription" component={TranscriptionView} />
+				</RootStack.Group>
+			</RootStack.Navigator>
+		</NavigationContainer>
+	);
 };
 
 const styles = StyleSheet.create({
