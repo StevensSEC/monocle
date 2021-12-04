@@ -18,10 +18,11 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 			setStatus("Reading...");
 			const formData = new FormData();
 			formData.append("image", {
+				//@ts-expect-error This is actually valid usage, but its not in the type declaration.
 				uri: route.params.latestImagePath,
 				name: "image.png",
 				type: "image/png",
-			} as never); // This is actually valid usage, but its not in the type declaration.
+			});
 
 			setStatus("Sending to server...");
 			try {
