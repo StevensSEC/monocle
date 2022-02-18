@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Camera } from "expo-camera";
-import PhotoButton from "../components/PhotoButton";
+import PhotoButton from "../PhotoButton";
 import { StackScreenProps } from "@react-navigation/stack";
-import { RootStackProps } from "../App";
+import { RootStackProps } from "../../App";
 
 type CameraProps = StackScreenProps<RootStackProps, "Camera">;
 
-const CameraView = ({ route, navigation }: CameraProps): JSX.Element => {
+const CameraScreen = ({ route, navigation }: CameraProps): JSX.Element => {
 	const [ref, setRef] = useState<Camera | null>();
 
 	const onPressPhotoButton = async (): Promise<void> => {
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default CameraView;
+export default CameraScreen;

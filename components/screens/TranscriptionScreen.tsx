@@ -1,12 +1,12 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import React from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
-import { RootStackProps } from "../App";
-import ResultContainer from "./ResultContainer";
+import { StyleSheet, View, Button } from "react-native";
+import { RootStackProps } from "../../App";
+import ResultContainer from "../ResultContainer";
 
 type TranscriptionProps = StackScreenProps<RootStackProps, "Transcription">;
 
-const TranscriptionView = ({ navigation, route }: TranscriptionProps): JSX.Element => {
+const TranscriptionScreen = ({ navigation, route }: TranscriptionProps): JSX.Element => {
 	return (
 		<View style={styles.container}>
 			<ResultContainer defaultText={route.params.results} />
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default TranscriptionView;
+export default TranscriptionScreen;

@@ -1,8 +1,8 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
-import { RootStackProps } from "../App";
-import { base64ImageToTensor } from "../util/image";
+import { RootStackProps } from "../../App";
+import { base64ImageToTensor } from "../../util/image";
 import * as tf from "@tensorflow/tfjs";
 import "@tensorflow/tfjs-react-native";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
@@ -10,7 +10,7 @@ import * as FileSystem from "expo-file-system";
 
 type ProcessingProps = StackScreenProps<RootStackProps, "Processing">;
 
-const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => {
+const ProcessingScreen = ({ navigation, route }: ProcessingProps): JSX.Element => {
 	const [objectDetectionPreidictions, setObjectDetectionPreidictions] =
 		useState<cocoSsd.DetectedObject[]>();
 	const [status, setStatus] = useState<string>("Waiting for image");
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default ProcessingView;
+export default ProcessingScreen;
