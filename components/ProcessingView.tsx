@@ -2,7 +2,6 @@ import { StackScreenProps } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { RootStackProps } from "../App";
-import * as FileSystem from "expo-file-system";
 import axios from "axios";
 
 const SERVER_URL = "https://sec-monocle.herokuapp.com";
@@ -37,6 +36,7 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 				});
 			} catch (e) {
 				setStatus("Failed to upload image.");
+				// eslint-disable-next-line
 				console.log(e);
 			}
 		};
