@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import CameraView from "./components/CameraView";
 import TranscriptionView from "./components/TranscriptionView";
-import { StyleSheet } from "react-native";
 import ProcessingView from "./components/ProcessingView";
 
 export type RootStackProps = {
@@ -35,15 +34,5 @@ const App = (): JSX.Element => {
 		</NavigationContainer>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		padding: 10,
-		paddingTop: 30,
-	},
-	filePath: {
-		fontWeight: "bold",
-	},
-});
 
 export default App;
