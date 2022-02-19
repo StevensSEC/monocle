@@ -23,7 +23,7 @@ module.exports = {
 			files: ["*.ts", "*.tsx"],
 			extends: ["plugin:@typescript-eslint/recommended-requiring-type-checking"],
 			parserOptions: {
-				project: ["./api-server/tsconfig.json"],
+				project: ["./tsconfig.json"],
 			},
 			rules: {
 				"@typescript-eslint/switch-exhaustiveness-check": "error",
