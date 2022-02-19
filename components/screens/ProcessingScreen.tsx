@@ -1,14 +1,14 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
-import { RootStackProps } from "../App";
+import { RootStackProps } from "../../App";
 import axios from "axios";
 
 const SERVER_URL = "https://sec-monocle.herokuapp.com";
 
 type ProcessingProps = StackScreenProps<RootStackProps, "Processing">;
 
-const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => {
+const ProcessingScreen = ({ navigation, route }: ProcessingProps): JSX.Element => {
 	const [status, setStatus] = useState<string>("Waiting for image");
 	const [showFilePath, setShowFilePath] = useState<boolean>(false);
 
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default ProcessingView;
+export default ProcessingScreen;
