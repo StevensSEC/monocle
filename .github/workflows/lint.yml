@@ -3,13 +3,13 @@ name: CI Lint
 on: [pull_request]
 
 jobs:
-  lint:
+  lint-front-end:
     runs-on: ubuntu-latest
     env:
       CI: true
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [16.x]
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
@@ -17,14 +17,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn
+        working-directory: front-end
       - name: Type Check
         run: yarn run tsc --noEmit
+        working-directory: front-end
       - name: Check for conflicting rules
         run: ./scripts/check_lint_rule_conflicts.sh
       - name: Check linting
-        run: npx eslint --config .eslintrc.js .
-      - name: Check format
-        run: npx prettier --config prettier.config.js --check "**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}"
+        run: yarn lint
+        working-directory: front-end
   lint-api-server:
     runs-on: ubuntu-latest
     env:
