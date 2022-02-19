@@ -14,7 +14,6 @@ You can check that these programs are installed by running `<program name> --ver
 
 ```
 npm install -g yarn
-yarn global add expo-cli
 ```
 
 This will install the Expo command line utility. Expo is a tool that will help us to test the project.
