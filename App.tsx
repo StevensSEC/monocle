@@ -4,7 +4,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import CameraScreen from "./components/screens/CameraScreen";
 import TranscriptionScreen from "./components/screens/TranscriptionScreen";
 import "@tensorflow/tfjs-react-native";
-import { Text, StyleSheet, View } from "react-native";
 import ProcessingScreen from "./components/screens/ProcessingScreen";
 
 export type RootStackProps = {
@@ -36,15 +35,5 @@ const App = (): JSX.Element => {
 		</NavigationContainer>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		padding: 10,
-		paddingTop: 30,
-	},
-	filePath: {
-		fontWeight: "bold",
-	},
-});
 
 export default App;

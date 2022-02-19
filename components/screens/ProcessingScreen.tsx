@@ -36,6 +36,7 @@ const ProcessingScreen = ({ navigation, route }: ProcessingProps): JSX.Element =
 				});
 			} catch (e) {
 				setStatus("Failed to upload image.");
+				// eslint-disable-next-line
 				console.log(e);
 			}
 		};
