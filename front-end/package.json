@@ -50,7 +50,7 @@
 		"typescript": "~4.0.0"
 	},
 	"lint-staged": {
-		"*.{ts,js}": "eslint --cache --fix"
+		"*.{ts,js,tsx,jsx}": "eslint --cache --fix"
 	},
 	"private": true
 }
