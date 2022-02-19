@@ -21,9 +21,6 @@ jobs:
       - name: Type Check
         run: yarn run tsc --noEmit
         working-directory: front-end
-      - name: Check for conflicting rules
-        run: ./scripts/check_lint_rule_conflicts.sh
-        working-directory: front-end
       - name: Check linting
         run: yarn lint
         working-directory: front-end
