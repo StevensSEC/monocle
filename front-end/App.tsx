@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import CameraScreen from "./components/screens/CameraScreen";
 import TranscriptionScreen from "./components/screens/TranscriptionScreen";
-import "@tensorflow/tfjs-react-native";
 import ProcessingScreen from "./components/screens/ProcessingScreen";
 
 export type RootStackProps = {
