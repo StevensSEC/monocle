@@ -2,15 +2,11 @@
 	"main": "node_modules/expo/AppEntry.js",
 	"scripts": {
 		"start": "expo start",
-		"android": "expo start --android",
-		"ios": "expo start --ios",
-		"web": "expo start --web",
 		"eject": "expo eject",
+		"prepare": "cd .. && husky install front-end/.husky && husky install api-server/.husky",
 		"lint": "tsc --noEmit && eslint --config .eslintrc.js --fix . && prettier --config prettier.config.js --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}\"",
 		"lint-check": "tsc --noEmit && eslint --config .eslintrc.js . && prettier --config prettier.config.js --check \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}\"",
-		"lint-staged": "tsc --noEmit && pretty-quick --staged && lint-staged",
-		"prepare": "husky install",
-		"api-server": "cd api-server && yarn run api"
+		"lint-staged": "tsc --noEmit && pretty-quick --staged && lint-staged"
 	},
 	"dependencies": {
 		"@react-native-async-storage/async-storage": "^1.15.8",
@@ -20,17 +16,17 @@
 		"expo": "44.0.6",
 		"expo-camera": "12.1.2",
 		"expo-clipboard": "2.1.1",
-		"expo-gl": "^10.4.2",
-		"expo-gl-cpp": "^10.4.1",
-		"expo-status-bar": "~1.0.4",
+		"expo-gl": "~11.1.2",
+		"expo-gl-cpp": "~11.1.1",
+		"expo-status-bar": "~1.2.0",
 		"jpeg-js": "^0.4.3",
-		"react": "16.13.1",
+		"react": "^17.0.2",
 		"react-dom": "16.13.1",
-		"react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+		"react-native": "0.64",
 		"react-native-fs": "^2.18.0",
-		"react-native-gesture-handler": "^1.10.3",
-		"react-native-safe-area-context": "3.2.0",
-		"react-native-screens": "~3.4.0",
+		"react-native-gesture-handler": "~2.1.0",
+		"react-native-safe-area-context": "3.3.2",
+		"react-native-screens": "~3.10.1",
 		"react-native-web": "~0.13.12"
 	},
 	"devDependencies": {
@@ -45,7 +41,7 @@
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^4.0.0",
-		"eslint-plugin-react": "^7.25.1",
+		"eslint-plugin-react": "^7.28.0",
 		"expo-cli": "^5.2.0",
 		"husky": "^7.0.2",
 		"lint-staged": "^11.1.2",
@@ -54,7 +50,7 @@
 		"typescript": "~4.0.0"
 	},
 	"lint-staged": {
-		"*.{ts,js}": "eslint --cache --fix"
+		"*.{ts,js,tsx,jsx}": "eslint --cache --fix"
 	},
 	"private": true
 }

@@ -9,15 +9,14 @@ import {
 	Image,
 	ImageBackground,
 } from "react-native";
-import { RootStackProps } from "../App";
-import * as FileSystem from "expo-file-system";
+import { RootStackProps } from "../../App";
 import axios from "axios";
 
 const SERVER_URL = "https://sec-monocle.herokuapp.com";
 
 type ProcessingProps = StackScreenProps<RootStackProps, "Processing">;
 
-const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => {
+const ProcessingScreen = ({ navigation, route }: ProcessingProps): JSX.Element => {
 	const [status, setStatus] = useState<string>("Waiting for image");
 	const [showFilePath, setShowFilePath] = useState<boolean>(false);
 
@@ -45,6 +44,7 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 				});
 			} catch (e) {
 				setStatus("Failed to upload image.");
+				// eslint-disable-next-line
 				console.log(e);
 			}
 		};
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default ProcessingView;
+export default ProcessingScreen;

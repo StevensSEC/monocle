@@ -7,7 +7,9 @@
 	"scripts": {
 		"start": "api start",
 		"api": "ts-node main.ts",
-		"lint": "tsc --noEmit && eslint --config .eslintrc.js --fix ."
+		"prepare": "cd .. && husky install front-end/.husky && husky install api-server/.husky",
+		"lint": "tsc --noEmit && eslint --config .eslintrc.js --fix .",
+		"lint-staged": "tsc --noEmit && pretty-quick --staged && lint-staged"
 	},
 	"dependencies": {
 		"@useoptic/cli": "^10.3.0",
@@ -25,7 +27,13 @@
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^4.0.0",
+		"husky": "^7.0.4",
+		"lint-staged": "^12.3.4",
 		"prettier": "^2.4.1",
+		"pretty-quick": "^3.1.3",
 		"typescript": "~4.0.0"
+	},
+	"lint-staged": {
+		"*.{ts,js}": "eslint --cache --fix"
 	}
 }
