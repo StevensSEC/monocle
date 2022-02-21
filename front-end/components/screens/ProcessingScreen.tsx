@@ -61,12 +61,12 @@ const ProcessingScreen = ({ navigation, route }: ProcessingProps): JSX.Element =
 						setShowFilePath(!showFilePath);
 					}}
 				>
-					<Text style={styles.filePath}>
+					<Text style={[styles.text, styles.filePath]}>
 						File Path: {showFilePath ? route.params.latestImagePath : "<Tap to reveal>"}
 					</Text>
 				</Pressable>
-				<ActivityIndicator size="large" color="#000000" />
-				<Text>Status: {status}</Text>
+				<ActivityIndicator style={styles.activityIndicator} size="large" color="#000000" />
+				<Text style={styles.text}>Status: {status}</Text>
 			</ImageBackground>
 		</View>
 	);
@@ -80,12 +80,30 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 	},
+	text: {
+		padding: 10,
+		margin: 10,
+		borderRadius: 10,
+		borderWidth: 3,
+		backgroundColor: "white",
+	},
+	activityIndicator: {
+		padding: 5,
+		margin: 10,
+		borderRadius: 50,
+		borderWidth: 3,
+		backgroundColor: "white",
+	},
 	filePath: {
 		fontWeight: "bold",
 	},
 	image: {
-		width: "100%",
-		height: "100%",
+		width: "105%",
+		height: "105%",
+		display: "flex",
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
 	},
 });
 
