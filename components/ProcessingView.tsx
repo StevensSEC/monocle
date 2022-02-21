@@ -1,6 +1,14 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import {
+	StyleSheet,
+	View,
+	Text,
+	Pressable,
+	ActivityIndicator,
+	Image,
+	ImageBackground,
+} from "react-native";
 import { RootStackProps } from "../App";
 import * as FileSystem from "expo-file-system";
 import axios from "axios";
@@ -47,16 +55,19 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 	}, []);
 	return (
 		<View style={styles.container}>
-			<Pressable
-				onPress={() => {
-					setShowFilePath(!showFilePath);
-				}}
-			>
-				<Text style={styles.filePath}>
-					File Path: {showFilePath ? route.params.latestImagePath : "<Tap to reveal>"}
-				</Text>
-			</Pressable>
-			<Text>Status: {status}</Text>
+			<ImageBackground source={{ uri: route.params.latestImagePath }} style={styles.image}>
+				<Pressable
+					onPress={() => {
+						setShowFilePath(!showFilePath);
+					}}
+				>
+					<Text style={styles.filePath}>
+						File Path: {showFilePath ? route.params.latestImagePath : "<Tap to reveal>"}
+					</Text>
+				</Pressable>
+				<ActivityIndicator size="large" color="#000000" />
+				<Text>Status: {status}</Text>
+			</ImageBackground>
 		</View>
 	);
 };
@@ -64,9 +75,17 @@ const ProcessingView = ({ navigation, route }: ProcessingProps): JSX.Element => 
 const styles = StyleSheet.create({
 	container: {
 		padding: 10,
+		display: "flex",
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
 	},
 	filePath: {
 		fontWeight: "bold",
+	},
+	image: {
+		width: "100%",
+		height: "100%",
 	},
 });
 
