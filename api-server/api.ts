@@ -6,7 +6,7 @@ const worker = createWorker({
 	logger: m => console.log(m),
 });
 
-let status: string = "starting...";
+let status = "starting...";
 
 void (async () => {
 	status = "loading tesseract";
