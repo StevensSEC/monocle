@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { RootStackProps } from "../../App";
 import axios from "axios";
+import { manipulateAsync, SaveFormat } from "expo-image-manipulator";
 
 const SERVER_URL = "https://sec-monocle.herokuapp.com";
 
@@ -14,11 +15,20 @@ const ProcessingScreen = ({ navigation, route }: ProcessingProps): JSX.Element =
 
 	useEffect(() => {
 		const handleImage = async () => {
-			setStatus("Reading...");
+			setStatus("Processing...");
+			let imgPath = route.params.latestImagePath;
+			console.log("image path: " + imgPath);
+			const result = await manipulateAsync(imgPath, [{ resize: { height: 1080 } }], {
+				compress: 0.8,
+				format: SaveFormat.JPEG,
+			});
+			imgPath = result.uri;
+			console.log("compressed image path: " + imgPath);
+
 			const formData = new FormData();
 			formData.append("image", {
 				//@ts-expect-error This is actually valid usage, but its not in the type declaration.
-				uri: route.params.latestImagePath,
+				uri: imgPath,
 				name: "image.png",
 				type: "image/png",
 			});
