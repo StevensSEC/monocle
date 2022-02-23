@@ -6,6 +6,5 @@
 		"strict": true,
 		"skipLibCheck": true, // to prevent errors during compilation w/ tensorflow
 		"strictNullChecks": true
-	},
-	"exclude": ["api-server/**"]
+	}
 }

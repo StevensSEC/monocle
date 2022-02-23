@@ -1,0 +1,14 @@
+{
+	"name": "monocle",
+	"license": "GPL3.0-OR-LATER",
+	"private": true,
+	"workspaces": [
+		"front-end",
+		"api-server"
+	],
+	"scripts": {
+		"start": "yarn workspace monocle-front-end start",
+		"lint": "yarn workspace monocle-front-end lint && yarn workspace monocle-api-server lint",
+		"test": "yarn workspace monocle-front-end test && yarn workspace monocle-api-server test"
+	}
+}
