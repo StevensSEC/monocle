@@ -1,6 +1,7 @@
 import express from "express";
 import { createWorker } from "tesseract.js";
 import multer from "multer";
+import type { MonocleApiResponse } from "../common/api";
 
 const worker = createWorker({
 	logger: m => console.log(m),
@@ -18,22 +19,6 @@ void (async () => {
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage, limits: { fieldSize: 10 * 1024 * 1024 } });
-
-// TODO: move these interfaces to a seperate module so that they can be reused on the client side.
-interface ResponseSuccess<T = undefined> {
-	success: true;
-	result: T;
-}
-
-interface ResponseError {
-	success: false;
-	error: {
-		name: string;
-		message: string;
-	};
-}
-
-export type MonocleApiResponse<T = undefined> = ResponseSuccess<T> | ResponseError;
 
 export const apirouter = express.Router();
 

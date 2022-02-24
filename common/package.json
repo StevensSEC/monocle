@@ -1,0 +1,7 @@
+{
+	"name": "monocle-common",
+	"version": "0.1.0",
+	"scripts": {
+		"lint": "tsc --noEmit && eslint --config .eslintrc.js --fix . && prettier --config prettier.config.js --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss}\""
+	}
+}
