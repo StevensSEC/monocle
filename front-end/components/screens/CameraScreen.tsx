@@ -9,6 +9,7 @@ type CameraProps = StackScreenProps<RootStackProps, "Camera">;
 
 const CameraScreen = ({ navigation }: CameraProps): JSX.Element => {
 	const [ref, setRef] = useState<Camera | null>();
+	const [ratio, setRatio] = useState<"4:3" | "16:9">("16:9");
 
 	const onPressPhotoButton = async (): Promise<void> => {
 		const picture = await ref?.takePictureAsync();
@@ -42,7 +43,13 @@ const CameraScreen = ({ navigation }: CameraProps): JSX.Element => {
 				ref={ref => {
 					setRef(ref);
 				}}
-				style={{ flex: 1 }}
+				style={{
+					// flex: 1,
+					minHeight: "100%",
+					width: "100%",
+					aspectRatio: 9 / 16,
+				}}
+				ratio={ratio}
 				type={Camera.Constants.Type.back}
 			/>
 			<PhotoButton onPress={onPressPhotoButton} />
