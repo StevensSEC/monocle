@@ -1,16 +1,21 @@
 {
-	"name": "monocle",
-	"license": "GPL3.0-OR-LATER",
-	"private": true,
-	"workspaces": [
-		"common",
-		"front-end",
-		"api-server"
-	],
-	"scripts": {
-		"start": "yarn workspace monocle-front-end start",
-		"api": "yarn workspace monocle-api-server api",
-		"lint": "yarn workspaces run lint",
-		"test": "yarn workspace monocle-front-end test && yarn workspace monocle-api-server test"
-	}
+  "name": "monocle",
+  "license": "GPL3.0-OR-LATER",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "common",
+      "front-end",
+      "api-server"
+    ],
+    "nohoist": [
+      "**/expo/"
+    ]
+  },
+  "scripts": {
+    "start": "yarn workspace monocle-front-end start",
+    "api": "yarn workspace monocle-api-server api",
+    "lint": "yarn workspaces run lint",
+    "test": "yarn workspace monocle-front-end test && yarn workspace monocle-api-server test"
+  }
 }
