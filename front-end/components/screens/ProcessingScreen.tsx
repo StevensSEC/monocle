@@ -6,7 +6,6 @@ import {
 	Text,
 	Pressable,
 	ActivityIndicator,
-	Image,
 	ImageBackground,
 } from "react-native";
 import { RootStackProps } from "../../App";
@@ -98,8 +97,8 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 	},
 	image: {
-		width: "105%",
-		height: "105%",
+		width: "100%",
+		height: "100%",
 		display: "flex",
 		flex: 1,
 		justifyContent: "center",
